@@ -1,19 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../store';
-import { fetchAuthors } from '../store/authors';
-import { fetchPublishers } from '../store/publishers';
-import { fetchBooks } from '../store/books';
+import { useAppSelector } from '../store';
 
 const Navigation = () => {
-	const dispatch = useAppDispatch();
 	const { authors, publishers, books } = useAppSelector((store) => store);
-
-	useEffect(() => {
-		dispatch(fetchAuthors());
-		dispatch(fetchPublishers());
-		dispatch(fetchBooks());
-	}, []);
 
 	return (
 		<nav data-cy="navigation">

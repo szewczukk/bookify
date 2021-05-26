@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navigation from './components/Navigation';
 import styled, { createGlobalStyle } from 'styled-components';
+import { fetchAuthors } from './store/authors';
+import { fetchPublishers } from './store/publishers';
+import { fetchBooks } from './store/books';
+import { useAppDispatch } from './store';
 
-const App = () => (
-	<>
-		<Global />
-		<Wrapper>
-			<Navigation />
-			<p>Wybierz stronę</p>
-		</Wrapper>
-	</>
-);
+const App = () => {
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(fetchAuthors());
+		dispatch(fetchPublishers());
+		dispatch(fetchBooks());
+	}, []);
+
+	return (
+		<>
+			<Global />
+			<Wrapper>
+				<Navigation />
+				<p>Wybierz stronę</p>
+			</Wrapper>
+		</>
+	);
+};
 
 export default App;
 
