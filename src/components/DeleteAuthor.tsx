@@ -22,7 +22,7 @@ const DeleteAuthor = ({ id }: Props) => {
 	};
 
 	return (
-		<button onClick={onClick}>
+		<button onClick={onClick} data-cy="delete">
 			{needsConfirmation ? 'Czy na pewno?' : 'Usuń'}
 		</button>
 	);

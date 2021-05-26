@@ -11,8 +11,13 @@ const Modal = () => {
 	return (
 		<OuterWrapper visible={visible}>
 			<InnerWrapper>
-				<p>{text}</p>
-				<button onClick={() => dispatch(actions.toggleModal())}>Ok</button>
+				<p data-cy="modal-text">{text}</p>
+				<button
+					data-cy="modal-submit"
+					onClick={() => dispatch(actions.toggleModal())}
+				>
+					Ok
+				</button>
 			</InnerWrapper>
 		</OuterWrapper>
 	);

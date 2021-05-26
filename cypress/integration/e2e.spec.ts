@@ -28,6 +28,9 @@ describe('E2E', () => {
 		cy.get('[data-cy=input-last-name]').type('Mickiewicz');
 		cy.get('[data-cy=form-create-author]').submit();
 
+		cy.get('[data-cy=modal-text]').should('contain', 'Sukces');
+		cy.get('[data-cy=modal-submit]').click();
+
 		cy.url().should('contain', 'authors');
 	});
 
@@ -35,7 +38,11 @@ describe('E2E', () => {
 		cy.get('[data-cy=link-authors]').click();
 
 		cy.get('[data-cy=author-Mickiewicz]').within(() => {
-			cy.get('[data-cy=delete]').click();
+			cy.get('[data-cy=delete]').should('contain', 'Usuń').click();
+			cy.get('[data-cy=delete]').should('contain', 'Czy na pewno?').click();
 		});
+
+		cy.get('[data-cy=modal-text]').should('contain', 'Sukces');
+		cy.get('[data-cy=modal-submit]').click();
 	});
 });
