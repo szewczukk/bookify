@@ -5,9 +5,9 @@ describe('E2E', () => {
 
 	it('Checks whether basic navigation was rendered', () => {
 		cy.get('[data-cy=navigation]').within(() => {
-			cy.get('[data-cy=authors]').contains('Wszyscy');
-			cy.get('[data-cy=publishers]').contains('Wszystkie');
-			cy.get('[data-cy=books]').contains('Wszystkie');
+			cy.get('[data-cy=authors]').contains('Autorzy');
+			cy.get('[data-cy=publishers]').contains('Wydawnictwa');
+			cy.get('[data-cy=books]').contains('Książki');
 		});
 	});
 
@@ -32,6 +32,8 @@ describe('E2E', () => {
 	});
 
 	it('Delete the created author', () => {
+		cy.get('[data-cy=link-authors]').click();
+
 		cy.get('[data-cy=author-Mickiewicz]').within(() => {
 			cy.get('[data-cy=delete]').click();
 		});

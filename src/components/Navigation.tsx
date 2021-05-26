@@ -22,7 +22,7 @@ const Navigation = () => {
 			<NavigationSection
 				cypressId="books"
 				subpage="books"
-				title="Ksiąki"
+				title="Książki"
 				data={books}
 			/>
 		</nav>
