@@ -19,7 +19,11 @@ const slice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchAuthors.fulfilled, (state, action) => {
-			action.payload.forEach((author) => {
+			const authors = action.payload.sort((a, b) =>
+				a.lastName.localeCompare(b.lastName),
+			);
+
+			authors.forEach((author) => {
 				state.push(author);
 			});
 		});
