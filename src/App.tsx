@@ -15,15 +15,21 @@ const App = () => (
 export default App;
 
 const Wrapper = styled.div`
-	width: 1000px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
 	padding: 16px;
-	margin: 0 auto;
-	display: grid;
-
-	grid-template-columns: 250px 1fr;
-	grid-template-rows: 1fr;
-
 	background-color: rgb(240, 240, 240);
+
+	@media (min-width: 1000px) {
+		width: 1000px;
+		margin: 0 auto;
+
+		display: grid;
+		grid-template-columns: 250px 1fr;
+		grid-template-rows: 1fr;
+	}
 `;
 
 const Global = createGlobalStyle`
