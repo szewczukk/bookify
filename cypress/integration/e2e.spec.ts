@@ -21,13 +21,13 @@ describe('E2E', () => {
 		cy.get('[data-cy=link-authors]').click();
 		cy.get('[data-cy=link-create-author]').click();
 
+		cy.contains('Powrót do listy');
+		cy.get('[data-cy=submit-create-author-form]').contains('Zapisz');
+
 		cy.get('[data-cy=input-first-name]').type('Adam');
 		cy.get('[data-cy=input-last-name]').type('Mickiewicz');
 		cy.get('[data-cy=form-create-author]').submit();
-		cy.get('[data-cy=submit-create-author-form]').contains('Zapisz');
-		cy.contains('Powrót do listy');
 
-		cy.url().contains('authors');
-		cy.get('[data-cy=modal]').contains('Sukces!');
+		cy.url().should('contain', 'authors');
 	});
 });

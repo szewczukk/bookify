@@ -10,6 +10,14 @@ export const fetchAuthors = createAsyncThunk<Author[]>(
 	},
 );
 
+export const createAuthor = createAsyncThunk<Author, Omit<Author, 'id'>>(
+	'authors/create',
+	async (author) => {
+		const response = await api.post('authors/', author);
+		return response.data;
+	},
+);
+
 type AuthorsState = Author[];
 const initialState: AuthorsState = [];
 
@@ -26,6 +34,9 @@ const slice = createSlice({
 			authors.forEach((author) => {
 				state.push(author);
 			});
+		});
+		builder.addCase(createAuthor.fulfilled, (state, action) => {
+			state.push(action.payload);
 		});
 	},
 });
