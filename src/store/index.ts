@@ -3,12 +3,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { reducer as authorsReducer } from './authors';
 import { reducer as publishersReducer } from './publishers';
 import { reducer as booksReducer } from './books';
+import { reducer as modalReducer } from './modal';
 
 const store = configureStore({
 	reducer: {
 		authors: authorsReducer,
 		publishers: publishersReducer,
 		books: booksReducer,
+		modal: modalReducer,
 	},
 });
 

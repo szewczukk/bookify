@@ -8,6 +8,7 @@ import { fetchBooks } from './store/books';
 import { useAppDispatch } from './store';
 import AllAuthorsPage from './pages/AllAuthorsPage';
 import CreateAuthorPage from './pages/CreateAuthorPage';
+import Modal from './components/Modal';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ const App = () => {
 					</Route>
 				</Switch>
 			</Wrapper>
+			<Modal />
 		</BrowserRouter>
 	);
 };
