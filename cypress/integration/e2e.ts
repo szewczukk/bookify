@@ -3,7 +3,7 @@ describe('E2E', () => {
 		cy.visit('http://localhost:3000/');
 	});
 
-	it('Checks whether ', () => {
+	it('Checks whether basic navigation was rendered', () => {
 		cy.get('[data-cy=navigation]').within(() => {
 			cy.get('[data-cy=authors]').contains('Wszyscy');
 			cy.get('[data-cy=publishers]').contains('Wszystkie');
