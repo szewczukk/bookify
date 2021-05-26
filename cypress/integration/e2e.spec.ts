@@ -30,4 +30,10 @@ describe('E2E', () => {
 
 		cy.url().should('contain', 'authors');
 	});
+
+	it('Delete the created author', () => {
+		cy.get('[data-cy=author-Mickiewicz]').within(() => {
+			cy.get('[data-cy=delete]').click();
+		});
+	});
 });

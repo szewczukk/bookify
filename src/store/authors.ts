@@ -18,6 +18,14 @@ export const createAuthor = createAsyncThunk<Author, Omit<Author, 'id'>>(
 	},
 );
 
+export const deleteAuthor = createAsyncThunk<Author, number>(
+	'authors/delete',
+	async (authorId) => {
+		const response = await api.delete(`authors/${authorId}`);
+		return response.data;
+	},
+);
+
 type AuthorsState = Author[];
 const initialState: AuthorsState = [];
 
@@ -37,6 +45,9 @@ const slice = createSlice({
 		});
 		builder.addCase(createAuthor.fulfilled, (state, action) => {
 			state.push(action.payload);
+		});
+		builder.addCase(deleteAuthor.fulfilled, (state, action) => {
+			return state.filter((author) => author.id !== action.payload.id);
 		});
 	},
 });
