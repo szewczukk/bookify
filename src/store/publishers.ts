@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import api from '../api';
+import api from '../utils/api';
+import { Publisher } from '../utils/types';
 
 export const fetchPublishers = createAsyncThunk<Publisher[]>(
 	'publisher/fetchAll',
@@ -9,11 +10,6 @@ export const fetchPublishers = createAsyncThunk<Publisher[]>(
 	},
 );
 
-interface Publisher {
-	id: number;
-	name: string;
-	establishmentYear: number;
-}
 type PublishersState = Publisher[];
 const initialState: PublishersState = [];
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import api from '../api';
+import api from '../utils/api';
+import { Book } from '../utils/types';
 
 export const fetchBooks = createAsyncThunk<Book[]>(
 	'books/fetchAll',
@@ -9,14 +10,6 @@ export const fetchBooks = createAsyncThunk<Book[]>(
 	},
 );
 
-interface Book {
-	id: number;
-	title: string;
-	isbn: number;
-	publishmentYear: number;
-	authorId: number;
-	publisherId: number;
-}
 type BooksState = Book[];
 const initialState: BooksState = [];
 
