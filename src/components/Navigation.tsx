@@ -3,14 +3,16 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../store';
 import { fetchAuthors } from '../store/authors';
 import { fetchPublishers } from '../store/publishers';
+import { fetchBooks } from '../store/books';
 
 const Navigation = () => {
 	const dispatch = useAppDispatch();
-	const store = useAppSelector((store) => store);
+	const { authors, publishers, books } = useAppSelector((store) => store);
 
 	useEffect(() => {
 		dispatch(fetchAuthors());
 		dispatch(fetchPublishers());
+		dispatch(fetchBooks());
 	}, []);
 
 	return (
@@ -21,7 +23,7 @@ const Navigation = () => {
 					<li>
 						<a>Wszyscy</a>
 					</li>
-					{store.authors.map((author) => (
+					{authors.map((author) => (
 						<li key={author.id}>
 							<a href="">
 								{author.firstName} {author.lastName}
@@ -36,7 +38,7 @@ const Navigation = () => {
 					<li>
 						<a>Wszystkie</a>
 					</li>
-					{store.publishers.map((publisher) => (
+					{publishers.map((publisher) => (
 						<li key={publisher.id}>
 							<a href="">{publisher.name}</a>
 						</li>
@@ -49,6 +51,11 @@ const Navigation = () => {
 					<li>
 						<a>Wszystkie</a>
 					</li>
+					{books.map((book) => (
+						<li key={book.id}>
+							<a href="">{book.title}</a>
+						</li>
+					))}
 				</List>
 			</div>
 		</nav>
