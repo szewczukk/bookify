@@ -7,6 +7,7 @@ import { fetchPublishers } from './store/publishers';
 import { fetchBooks } from './store/books';
 import { useAppDispatch } from './store';
 import AllAuthorsPage from './pages/AllAuthorsPage';
+import CreateAuthorPage from './pages/CreateAuthorPage';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -25,6 +26,9 @@ const App = () => {
 				<Switch>
 					<Route path="/authors/">
 						<AllAuthorsPage />
+					</Route>
+					<Route path="/create-author">
+						<CreateAuthorPage />
 					</Route>
 					<Route path="/" exact>
 						<p>Wybierz stronę</p>
