@@ -2,10 +2,17 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../store';
-import { createAuthor } from '../store/authors';
+import { createAuthor, editAuthor } from '../store/authors';
 import { actions } from '../store/modal';
 
-const CreateAuthorPage = () => {
+interface Props {
+	id?: number;
+	firstName?: string;
+	lastName?: string;
+	edit?: boolean;
+}
+
+const CreateAuthorPage = ({ id, firstName, lastName, edit }: Props) => {
 	const dispatch = useAppDispatch();
 	const history = useHistory();
 
@@ -13,15 +20,22 @@ const CreateAuthorPage = () => {
 		<div>
 			<Link to="/authors">Powrót do listy</Link>
 			<Formik
-				initialValues={{ firstName: '', lastName: '' }}
+				initialValues={{ firstName: firstName || '', lastName: lastName || '' }}
 				onSubmit={async (values) => {
-					await dispatch(createAuthor(values));
-					history.push('/authors');
-					dispatch(actions.setText('Sukces'));
-					dispatch(actions.toggleModal());
+					if (edit && id) {
+						await dispatch(editAuthor({ ...values, id }));
+						history.push('/authors');
+						dispatch(actions.setText('Sukces'));
+						dispatch(actions.toggleModal());
+					} else {
+						await dispatch(createAuthor(values));
+						history.push('/authors');
+						dispatch(actions.setText('Sukces'));
+						dispatch(actions.toggleModal());
+					}
 				}}
 			>
-				<Form data-cy="form-create-author">
+				<Form data-cy="form">
 					<label htmlFor="firstName">Imię</label>
 					<Field
 						id="firstName"
@@ -40,7 +54,7 @@ const CreateAuthorPage = () => {
 						data-cy="input-last-name"
 					/>
 
-					<button type="submit" data-cy="submit-create-author-form">
+					<button type="submit" data-cy="submit">
 						Zapisz
 					</button>
 				</Form>

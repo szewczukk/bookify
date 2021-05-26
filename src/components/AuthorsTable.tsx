@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../store';
 
 import DeleteAuthor from './DeleteAuthor';
@@ -23,7 +24,9 @@ const AllAuthorsPage = () => {
 						<td>{author.firstName}</td>
 						<td>{author.lastName}</td>
 						<td>
-							<button>Edytuj</button>
+							<Link to={`/edit-author/${author.id}`} data-cy="edit">
+								Edytuj
+							</Link>
 							<DeleteAuthor id={author.id} />
 						</td>
 					</tr>

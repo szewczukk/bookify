@@ -9,6 +9,7 @@ import { useAppDispatch } from './store';
 import AllAuthorsPage from './pages/AllAuthorsPage';
 import CreateAuthorPage from './pages/CreateAuthorPage';
 import Modal from './components/Modal';
+import EditAuthorPage from './pages/EditAuthorPage';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -30,6 +31,9 @@ const App = () => {
 					</Route>
 					<Route path="/create-author">
 						<CreateAuthorPage />
+					</Route>
+					<Route path="/edit-author/:id">
+						<EditAuthorPage />
 					</Route>
 					<Route path="/" exact>
 						<p>Wybierz stronę</p>
