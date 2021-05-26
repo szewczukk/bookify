@@ -19,7 +19,7 @@ const AllAuthorsPage = () => {
 			</thead>
 			<tbody>
 				{authors?.map((author) => (
-					<tr key={author.id} data-cy={`author-${author.lastName}`}>
+					<tr key={author.id} data-cy={`author-row`}>
 						<td>{author.id}</td>
 						<td>{author.firstName}</td>
 						<td>{author.lastName}</td>

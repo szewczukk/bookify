@@ -37,9 +37,12 @@ describe('E2E', () => {
 	it('Edit the created user', () => {
 		cy.get('[data-cy=link-authors]').click();
 
-		cy.get('[data-cy=author-Mickiewicz]').within(() => {
-			cy.get('[data-cy=edit]').should('contain', 'Edytuj').click();
-		});
+		cy.get('[data-cy=author-row]')
+			.contains('Mickiewicz')
+			.parent()
+			.within(() => {
+				cy.get('[data-cy=edit]').should('contain', 'Edytuj').click();
+			});
 
 		cy.get('[data-cy=input-first-name]').clear().type('Juliusz');
 		cy.get('[data-cy=input-last-name]').clear().type('Słowacki');
@@ -54,10 +57,13 @@ describe('E2E', () => {
 	it('Delete the created author', () => {
 		cy.get('[data-cy=link-authors]').click();
 
-		cy.get('[data-cy=author-Słowacki]').within(() => {
-			cy.get('[data-cy=delete]').should('contain', 'Usuń').click();
-			cy.get('[data-cy=delete]').should('contain', 'Czy na pewno?').click();
-		});
+		cy.get('[data-cy=author-row]')
+			.contains('Słowacki')
+			.parent()
+			.within(() => {
+				cy.get('[data-cy=delete]').should('contain', 'Usuń').click();
+				cy.get('[data-cy=delete]').should('contain', 'Czy na pewno?').click();
+			});
 
 		cy.get('[data-cy=modal-text]').should('contain', 'Sukces');
 		cy.get('[data-cy=modal-submit]').click();
