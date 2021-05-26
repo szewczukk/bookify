@@ -6,7 +6,9 @@ const AllAuthorsPage = () => {
 	return (
 		(
 			<div>
-				<Link to="/create-author">Dodaj</Link>
+				<Link to="/create-author" data-cy="link-create-author">
+					Dodaj
+				</Link>
 				<AuthorsTable />
 			</div>
 		) ?? <p>Loading..</p>
