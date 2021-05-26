@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../store';
 import { fetchAuthors } from '../store/authors';
+import { fetchPublishers } from '../store/publishers';
 
 const Navigation = () => {
 	const dispatch = useAppDispatch();
-	const authors = useAppSelector((store) => store.authors);
+	const store = useAppSelector((store) => store);
 
 	useEffect(() => {
 		dispatch(fetchAuthors());
+		dispatch(fetchPublishers());
 	}, []);
 
 	return (
@@ -19,7 +21,7 @@ const Navigation = () => {
 					<li>
 						<a>Wszyscy</a>
 					</li>
-					{authors.map((author) => (
+					{store.authors.map((author) => (
 						<li key={author.id}>
 							<a href="">
 								{author.firstName} {author.lastName}
@@ -34,6 +36,11 @@ const Navigation = () => {
 					<li>
 						<a>Wszystkie</a>
 					</li>
+					{store.publishers.map((publisher) => (
+						<li key={publisher.id}>
+							<a href="">{publisher.name}</a>
+						</li>
+					))}
 				</List>
 			</div>
 			<div data-cy="books">
