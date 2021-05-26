@@ -43,13 +43,7 @@ const slice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchAuthors.fulfilled, (state, action) => {
-			const authors = action.payload.sort((a, b) =>
-				a.lastName.localeCompare(b.lastName),
-			);
-
-			authors.forEach((author) => {
-				state.push(author);
-			});
+			return action.payload;
 		});
 		builder.addCase(createAuthor.fulfilled, (state, action) => {
 			state.push(action.payload);
