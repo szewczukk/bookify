@@ -10,4 +10,10 @@ describe('E2E', () => {
 			cy.get('[data-cy=books]').contains('Wszystkie');
 		});
 	});
+
+	it('Checks if authors link redirects to author subpage', () => {
+		cy.get('[data-cy=link-authors]').click();
+
+		cy.url().should('contain', 'authors');
+	});
 });

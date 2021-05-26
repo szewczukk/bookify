@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
 	Author,
@@ -11,43 +12,52 @@ import {
 
 interface Props {
 	data: (Book | Author | Publisher)[];
+	subpage: string;
 	title: string;
 	allString: string;
 	cypressId: string;
 }
 
-function renderElement(element: Book | Author | Publisher) {
+function renderElement(element: Book | Author | Publisher, subpage: string) {
 	if (isBook(element)) {
 		return (
 			<li key={element.id}>
-				<a href="">{element.title}</a>
+				<Link to={`/${subpage}/${element.id}`}>{element.title}</Link>
 			</li>
 		);
 	} else if (isAuthor(element)) {
 		return (
 			<li key={element.id}>
-				<a href="">
+				<Link to={`/${subpage}/${element.id}`}>
 					{element.firstName} {element.lastName}
-				</a>
+				</Link>
 			</li>
 		);
 	} else if (isPublisher(element)) {
 		return (
 			<li key={element.id}>
-				<a href="">{element.name}</a>
+				<Link to={`/${subpage}/${element.id}`}>{element.name}</Link>
 			</li>
 		);
 	}
 }
 
-const NavigationSection = ({ data, allString, title, cypressId }: Props) => (
+const NavigationSection = ({
+	data,
+	allString,
+	title,
+	cypressId,
+	subpage,
+}: Props) => (
 	<div data-cy={cypressId}>
 		<Paragraph>{title}</Paragraph>
 		<List>
 			<li>
-				<a>{allString}</a>
+				<Link to={`/${subpage}`} data-cy={`link-${subpage}`}>
+					{allString}
+				</Link>
 			</li>
-			{data.map((element) => renderElement(element))}
+			{data.map((element) => renderElement(element, subpage))}
 		</List>
 	</div>
 );

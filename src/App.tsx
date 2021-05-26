@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import styled, { createGlobalStyle } from 'styled-components';
 import { fetchAuthors } from './store/authors';
 import { fetchPublishers } from './store/publishers';
 import { fetchBooks } from './store/books';
 import { useAppDispatch } from './store';
+import AllAuthorsPage from './pages/AllAuthorsPage';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -16,13 +18,20 @@ const App = () => {
 	}, []);
 
 	return (
-		<>
+		<BrowserRouter>
 			<Global />
 			<Wrapper>
 				<Navigation />
-				<p>Wybierz stronę</p>
+				<Switch>
+					<Route path="/authors/">
+						<AllAuthorsPage />
+					</Route>
+					<Route path="/" exact>
+						<p>Wybierz stronę</p>
+					</Route>
+				</Switch>
 			</Wrapper>
-		</>
+		</BrowserRouter>
 	);
 };
 
