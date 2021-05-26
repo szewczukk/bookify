@@ -5,7 +5,7 @@ import { fetchAuthors } from '../store/authors';
 
 const Navigation = () => {
 	const dispatch = useAppDispatch();
-	const authors = useAppSelector((store) => store.authors.authors);
+	const authors = useAppSelector((store) => store.authors);
 
 	useEffect(() => {
 		dispatch(fetchAuthors());

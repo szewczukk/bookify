@@ -14,10 +14,8 @@ interface Author {
 	firstName: string;
 	lastName: string;
 }
-interface AuthorsState {
-	authors: Author[];
-}
-const initialState: AuthorsState = { authors: [] };
+type AuthorsState = Author[];
+const initialState: AuthorsState = [];
 
 const slice = createSlice({
 	name: 'authors',
@@ -26,7 +24,7 @@ const slice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(fetchAuthors.fulfilled, (state, action) => {
 			action.payload.forEach((author) => {
-				state.authors.push(author);
+				state.push(author);
 			});
 		});
 	},
