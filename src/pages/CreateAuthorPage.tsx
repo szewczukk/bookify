@@ -3,6 +3,7 @@ import { Field, Form, Formik } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { createAuthor } from '../store/authors';
+import { actions } from '../store/modal';
 
 const CreateAuthorPage = () => {
 	const dispatch = useAppDispatch();
@@ -16,6 +17,8 @@ const CreateAuthorPage = () => {
 				onSubmit={async (values) => {
 					await dispatch(createAuthor(values));
 					history.push('/authors');
+					dispatch(actions.setText('Sukces'));
+					dispatch(actions.toggleModal());
 				}}
 			>
 				<Form data-cy="form-create-author">

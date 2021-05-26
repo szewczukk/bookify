@@ -2,10 +2,17 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import { deleteAuthor } from '../store/authors';
+import { actions } from '../store/modal';
 
 const AllAuthorsPage = () => {
 	const authors = useAppSelector((state) => state.authors);
 	const dispatch = useDispatch();
+
+	const onDelete = (id: number) => {
+		dispatch(actions.setText('Sukces'));
+		dispatch(actions.toggleModal());
+		dispatch(deleteAuthor(id));
+	};
 
 	return (
 		<table>
@@ -15,10 +22,7 @@ const AllAuthorsPage = () => {
 					<td> {author.firstName}</td> <td> {author.lastName}</td>
 					<td>
 						<button>Edytuj</button>
-						<button
-							onClick={() => dispatch(deleteAuthor(author.id))}
-							data-cy="delete"
-						>
+						<button onClick={() => onDelete(author.id)} data-cy="delete">
 							Usuń
 						</button>
 					</td>
