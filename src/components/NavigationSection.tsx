@@ -14,51 +14,29 @@ interface Props {
 	data: (Book | Author | Publisher)[];
 	subpage: string;
 	title: string;
-	allString: string;
 	cypressId: string;
 }
 
-function renderElement(element: Book | Author | Publisher, subpage: string) {
+function renderElement(element: Book | Author | Publisher) {
 	if (isBook(element)) {
-		return (
-			<li key={element.id}>
-				<Link to={`/${subpage}/${element.id}`}>{element.title}</Link>
-			</li>
-		);
+		return <li key={element.id}>{element.title}</li>;
 	} else if (isAuthor(element)) {
 		return (
 			<li key={element.id}>
-				<Link to={`/${subpage}/${element.id}`}>
-					{element.firstName} {element.lastName}
-				</Link>
+				{element.firstName} {element.lastName}
 			</li>
 		);
 	} else if (isPublisher(element)) {
-		return (
-			<li key={element.id}>
-				<Link to={`/${subpage}/${element.id}`}>{element.name}</Link>
-			</li>
-		);
+		return <li key={element.id}>{element.name}</li>;
 	}
 }
 
-const NavigationSection = ({
-	data,
-	allString,
-	title,
-	cypressId,
-	subpage,
-}: Props) => (
+const NavigationSection = ({ data, title, cypressId, subpage }: Props) => (
 	<div data-cy={cypressId}>
-		<Paragraph>{title}</Paragraph>
-		<List>
-			<li>
-				<Link to={`/${subpage}`} data-cy={`link-${subpage}`}>
-					{allString}
-				</Link>
-			</li>
-			{data.map((element) => renderElement(element, subpage))}
-		</List>
+		<Link to={`/${subpage}`} data-cy={`link-${subpage}`}>
+			<Paragraph>{title}</Paragraph>
+		</Link>
+		<List>{data.map((element) => renderElement(element))}</List>
 	</div>
 );
 
