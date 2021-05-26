@@ -1,32 +1,43 @@
 import React from 'react';
+import styled from 'styled-components';
 
 const Navigation = () => (
 	<nav data-cy="navigation">
 		<div data-cy="authors">
-			<p>Autorzy</p>
-			<ul>
+			<Paragraph>Autorzy</Paragraph>
+			<List>
 				<li>
 					<a>Wszyscy</a>
 				</li>
-			</ul>
+			</List>
 		</div>
 		<div data-cy="publishers">
-			<p>Wydawnictwa</p>
-			<ul>
+			<Paragraph>Wydawnictwa</Paragraph>
+			<List>
 				<li>
 					<a>Wszystkie</a>
 				</li>
-			</ul>
+			</List>
 		</div>
 		<div data-cy="books">
-			<p>Książki</p>
-			<ul>
+			<Paragraph>Książki</Paragraph>
+			<List>
 				<li>
 					<a>Wszystkie</a>
 				</li>
-			</ul>
+			</List>
 		</div>
 	</nav>
 );
 
 export default Navigation;
+
+const Paragraph = styled.p`
+	margin: 0;
+`;
+
+const List = styled.ul`
+	margin: 0 0 0 2rem;
+	padding: 0;
+	list-style: none;
+`;
