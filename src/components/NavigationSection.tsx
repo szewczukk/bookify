@@ -19,15 +19,11 @@ interface Props {
 
 function renderElement(element: Book | Author | Publisher) {
 	if (isBook(element)) {
-		return <li key={element.id}>{element.title}</li>;
+		return element.title;
 	} else if (isAuthor(element)) {
-		return (
-			<li key={element.id}>
-				{element.firstName} {element.lastName}
-			</li>
-		);
+		return `${element.firstName} ${element.lastName}`;
 	} else if (isPublisher(element)) {
-		return <li key={element.id}>{element.name}</li>;
+		return element.name;
 	}
 }
 
@@ -36,7 +32,11 @@ const NavigationSection = ({ data, title, cypressId, subpage }: Props) => (
 		<Link to={`/${subpage}`} data-cy={`link-${subpage}`}>
 			<Paragraph>{title}</Paragraph>
 		</Link>
-		<List>{data.map((element) => renderElement(element))}</List>
+		<List>
+			{data.map((element) => (
+				<li key={element.id}>{renderElement(element)}</li>
+			))}
+		</List>
 	</div>
 );
 
