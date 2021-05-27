@@ -17,7 +17,7 @@ const CreateAuthorPage = ({ id, firstName, lastName, edit }: Props) => {
 	const history = useHistory();
 
 	return (
-		<div>
+		<main>
 			<Link to="/authors">Powrót do listy</Link>
 			<Formik
 				initialValues={{ firstName: firstName || '', lastName: lastName || '' }}
@@ -59,7 +59,7 @@ const CreateAuthorPage = ({ id, firstName, lastName, edit }: Props) => {
 					</button>
 				</Form>
 			</Formik>
-		</div>
+		</main>
 	);
 };
 
