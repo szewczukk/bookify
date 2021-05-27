@@ -35,8 +35,6 @@ const CreateBookPage = ({
 		return <h1>Brak wydawców i/lub autorów</h1>;
 	}
 
-	console.log(title, isbn, authorId, publisherId);
-
 	return (
 		<main>
 			<Link to="/books">Powrót do listy</Link>
@@ -53,7 +51,10 @@ const CreateBookPage = ({
 
 					const regex = /^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/;
 
-					if (!regex.test(values.isbn)) {
+					if (
+						!regex.test(values.isbn) ||
+						values.isbn.replaceAll('-', '').length !== 13
+					) {
 						errors.isbn = 'Zły format ISBN';
 					}
 					if (values.publishmentYear > new Date().getFullYear()) {
