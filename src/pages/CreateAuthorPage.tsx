@@ -1,9 +1,8 @@
 import React from 'react';
 import { Field, Formik } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../store';
+import { useAppDispatch } from '../store';
 import { createAuthor, editAuthor } from '../store/authors';
-import { actions } from '../store/modal';
 import { Author } from '../utils/types';
 import Form from '../components/Form';
 
@@ -13,7 +12,6 @@ interface Props extends Partial<Author> {
 
 const CreateAuthorPage = ({ id, firstName, lastName, edit }: Props) => {
 	const dispatch = useAppDispatch();
-	const { status } = useAppSelector((state) => state.authors);
 	const history = useHistory();
 
 	return (
@@ -24,9 +22,6 @@ const CreateAuthorPage = ({ id, firstName, lastName, edit }: Props) => {
 				onSubmit={async (values) => {
 					if (edit && id) {
 						await dispatch(editAuthor({ ...values, id }));
-
-						dispatch(actions.setText(status === 'success' ? 'Sukces' : 'Błąd'));
-						dispatch(actions.toggleModal());
 					} else {
 						await dispatch(createAuthor(values));
 					}

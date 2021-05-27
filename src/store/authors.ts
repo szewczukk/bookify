@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import api from '../utils/api';
 import { Author } from '../utils/types';
 
@@ -46,21 +46,22 @@ const initialState: AuthorsState = {
 const slice = createSlice({
 	name: 'authors',
 	initialState,
-	reducers: {},
+	reducers: {
+		setStatus: (state, action: PayloadAction<AuthorsState['status']>) => {
+			state.status = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchAuthors.fulfilled, (state, action) => {
 			state.entities = action.payload;
-			state.status = 'success';
 		});
 		builder.addCase(createAuthor.fulfilled, (state, action) => {
 			state.entities.push(action.payload);
-			state.status = 'success';
 		});
 		builder.addCase(deleteAuthor.fulfilled, (state, action) => {
 			state.entities = state.entities.filter(
 				(author) => author.id !== action.payload.id,
 			);
-			state.status = 'success';
 		});
 		builder.addCase(editAuthor.fulfilled, (state, action) => {
 			state.entities = [
