@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../store';
 import { Book } from '../utils/types';
-import DeletePublisher from './DeletePublisher';
+import DeleteBook from './DeleteBook';
 import TableCell from './TableCell';
 
 const BooksRow = ({
@@ -37,7 +37,7 @@ const BooksRow = ({
 				<Link to={`/edit-book/${id}`} data-cy="edit">
 					Edytuj
 				</Link>
-				<DeletePublisher id={id} />
+				<DeleteBook id={id} />
 			</TableCell>
 		</tr>
 	);
