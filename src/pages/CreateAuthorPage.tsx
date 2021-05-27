@@ -4,11 +4,9 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { createAuthor, editAuthor } from '../store/authors';
 import { actions } from '../store/modal';
+import { Author } from '../utils/types';
 
-interface Props {
-	id?: number;
-	firstName?: string;
-	lastName?: string;
+interface Props extends Partial<Author> {
 	edit?: boolean;
 }
 

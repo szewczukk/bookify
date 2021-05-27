@@ -4,11 +4,9 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { actions } from '../store/modal';
 import { createPublisher, editPublisher } from '../store/publishers';
+import { Publisher } from '../utils/types';
 
-interface Props {
-	id?: number;
-	name?: string;
-	establishmentYear?: number;
+interface Props extends Partial<Publisher> {
 	edit?: boolean;
 }
 
