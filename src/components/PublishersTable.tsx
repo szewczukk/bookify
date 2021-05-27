@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../store';
+import DeletePublisher from './DeletePublisher';
 
-import DeleteAuthor from './DeleteAuthor';
-
-const AllAuthorsPage = () => {
+const AllPublishersTable = () => {
 	const publishers = useAppSelector((state) => state.publishers);
 
 	return (
@@ -27,7 +26,7 @@ const AllAuthorsPage = () => {
 							<Link to={`/edit-publisher/${publisher.id}`} data-cy="edit">
 								Edytuj
 							</Link>
-							<DeleteAuthor id={publisher.id} />
+							<DeletePublisher id={publisher.id} />
 						</td>
 					</tr>
 				))}
@@ -36,4 +35,4 @@ const AllAuthorsPage = () => {
 	);
 };
 
-export default AllAuthorsPage;
+export default AllPublishersTable;
