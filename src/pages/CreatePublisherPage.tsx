@@ -31,15 +31,12 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 				onSubmit={async (values) => {
 					if (edit && id) {
 						await dispatch(editPublisher({ ...values, id }));
-						history.push('/publishers');
 						dispatch(actions.setText('Sukces'));
 						dispatch(actions.toggleModal());
 					} else {
 						await dispatch(createPublisher(values));
-						history.push('/publishers');
-						dispatch(actions.setText('Sukces'));
-						dispatch(actions.toggleModal());
 					}
+					history.push('/publishers');
 				}}
 			>
 				{({ errors }) => (

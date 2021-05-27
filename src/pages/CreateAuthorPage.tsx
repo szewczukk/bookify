@@ -23,15 +23,12 @@ const CreateAuthorPage = ({ id, firstName, lastName, edit }: Props) => {
 				onSubmit={async (values) => {
 					if (edit && id) {
 						await dispatch(editAuthor({ ...values, id }));
-						history.push('/authors');
 						dispatch(actions.setText('Sukces'));
 						dispatch(actions.toggleModal());
 					} else {
 						await dispatch(createAuthor(values));
-						history.push('/authors');
-						dispatch(actions.setText('Sukces'));
-						dispatch(actions.toggleModal());
 					}
+					history.push('/authors');
 				}}
 			>
 				<Form data-cy="form">

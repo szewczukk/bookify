@@ -14,9 +14,6 @@ describe('Authors testing', () => {
 		cy.get('[data-cy=input-last-name]').type('Mickiewicz');
 		cy.get('[data-cy=form]').submit();
 
-		cy.get('[data-cy=modal-text]').should('contain', 'Sukces');
-		cy.get('[data-cy=modal-submit]').click();
-
 		cy.url().should('contain', 'authors');
 	});
 

@@ -11,9 +11,6 @@ describe('Testing publishers functionality', () => {
 		cy.get('[data-cy=input-year]').type('2001');
 		cy.get('[data-cy=form]').submit();
 
-		cy.get('[data-cy=modal-text]').should('contain', 'Sukces');
-		cy.get('[data-cy=modal-submit]').click();
-
 		cy.url().should('contain', 'books');
 
 		cy.get('[data-cy=book-row]').should('contain', 'Hobbit');

@@ -67,17 +67,14 @@ const CreateBookPage = ({
 				onSubmit={async (values) => {
 					if (edit && id) {
 						await dispatch(editBook({ ...values, id }));
-						history.push('/books');
 						dispatch(actions.setText('Sukces'));
 						dispatch(actions.toggleModal());
 					} else {
 						await dispatch(
 							createBook({ ...values, isbn: values.isbn.replaceAll('-', '') }),
 						);
-						history.push('/books');
-						dispatch(actions.setText('Sukces'));
-						dispatch(actions.toggleModal());
 					}
+					history.push('/books');
 				}}
 			>
 				{({ errors }) => (

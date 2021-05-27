@@ -10,9 +10,6 @@ describe('Testing publishers functionality', () => {
 		cy.get('[data-cy=input-year]').type('2020');
 		cy.get('[data-cy=form]').submit();
 
-		cy.get('[data-cy=modal-text]').should('contain', 'Sukces');
-		cy.get('[data-cy=modal-submit]').click();
-
 		cy.url().should('contain', 'publishers');
 
 		cy.get('[data-cy=publisher-row]').should('contain', 'ABC');
