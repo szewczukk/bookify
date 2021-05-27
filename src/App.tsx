@@ -10,6 +10,7 @@ import AllAuthorsPage from './pages/AllAuthorsPage';
 import CreateAuthorPage from './pages/CreateAuthorPage';
 import Modal from './components/Modal';
 import EditAuthorPage from './pages/EditAuthorPage';
+import AllPublishersPage from './pages/AllPublishersPage';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -34,6 +35,9 @@ const App = () => {
 					</Route>
 					<Route path="/edit-author/:id">
 						<EditAuthorPage />
+					</Route>
+					<Route path="/publishers/">
+						<AllPublishersPage />
 					</Route>
 					<Route path="/" exact>
 						<p>Wybierz stronę</p>
