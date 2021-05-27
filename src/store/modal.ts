@@ -11,10 +11,10 @@ const slice = createSlice({
 	initialState,
 	reducers: {
 		toggleModal: (state) => {
-			return { ...state, visible: !state.visible };
+			state.visible = !state.visible;
 		},
 		setText: (state, action: PayloadAction<string>) => {
-			return { ...state, text: action.payload };
+			state.text = action.payload;
 		},
 	},
 });
