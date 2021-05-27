@@ -34,8 +34,14 @@ export const deleteBook = createAsyncThunk<Book, number>(
 	},
 );
 
-type BooksState = Book[];
-const initialState: BooksState = [];
+interface BooksState {
+	entities: Book[];
+	status: 'none' | 'success' | 'error';
+}
+const initialState: BooksState = {
+	entities: [],
+	status: 'none',
+};
 
 const slice = createSlice({
 	name: 'books',
@@ -43,17 +49,19 @@ const slice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchBooks.fulfilled, (state, action) => {
-			return action.payload;
+			state.entities = action.payload;
 		});
 		builder.addCase(createBook.fulfilled, (state, action) => {
-			state.push(action.payload);
+			state.entities.push(action.payload);
 		});
 		builder.addCase(deleteBook.fulfilled, (state, action) => {
-			return state.filter((book) => book.id !== action.payload.id);
+			state.entities = state.entities.filter(
+				(book) => book.id !== action.payload.id,
+			);
 		});
 		builder.addCase(editBook.fulfilled, (state, action) => {
-			return [
-				...state.filter((book) => book.id !== action.payload.id),
+			state.entities = [
+				...state.entities.filter((book) => book.id !== action.payload.id),
 				action.payload,
 			];
 		});

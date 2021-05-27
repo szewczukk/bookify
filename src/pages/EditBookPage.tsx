@@ -9,9 +9,9 @@ interface RouterParams {
 
 const EditBookPage = () => {
 	const { id } = useParams<RouterParams>();
-	const books = useAppSelector((state) => state.books);
-
-	const book = books.find((book) => book.id === parseInt(id));
+	const book = useAppSelector((state) => state.books.entities).find(
+		(book) => book.id === parseInt(id),
+	);
 
 	return <CreateBookPage {...book} edit={true} />;
 };

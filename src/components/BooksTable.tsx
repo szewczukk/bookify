@@ -3,7 +3,7 @@ import { useAppSelector } from '../store';
 import BooksRow from './BooksRow';
 
 const BooksTable = () => {
-	const books = useAppSelector((state) => state.books);
+	const { entities } = useAppSelector((state) => state.books);
 
 	return (
 		<table>
@@ -19,7 +19,7 @@ const BooksTable = () => {
 				</tr>
 			</thead>
 			<tbody>
-				{books.map((book) => (
+				{entities.map((book) => (
 					<BooksRow {...book} key={book.id} />
 				))}
 			</tbody>

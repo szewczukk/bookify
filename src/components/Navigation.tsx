@@ -23,7 +23,7 @@ const Navigation = () => {
 				cypressId="books"
 				subpage="books"
 				title="Książki"
-				data={books}
+				data={books.entities}
 			/>
 		</nav>
 	);
