@@ -18,6 +18,14 @@ export const createPublisher = createAsyncThunk<
 	return response.data;
 });
 
+export const editPublisher = createAsyncThunk<Publisher, Publisher>(
+	'authors/edit',
+	async (publisher) => {
+		const response = await api.put(`publishers/${publisher.id}`, publisher);
+		return response.data;
+	},
+);
+
 export const deletePublisher = createAsyncThunk<Publisher, number>(
 	'publisher/delete',
 	async (publisherId) => {
@@ -42,6 +50,12 @@ const slice = createSlice({
 		});
 		builder.addCase(deletePublisher.fulfilled, (state, action) => {
 			return state.filter((publisher) => publisher.id !== action.payload.id);
+		});
+		builder.addCase(editPublisher.fulfilled, (state, action) => {
+			return [
+				...state.filter((publisher) => publisher.id !== action.payload.id),
+				action.payload,
+			];
 		});
 	},
 });

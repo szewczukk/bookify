@@ -3,7 +3,7 @@ import { Field, Form, Formik } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { actions } from '../store/modal';
-import { createPublisher } from '../store/publishers';
+import { createPublisher, editPublisher } from '../store/publishers';
 
 interface Props {
 	id?: number;
@@ -31,7 +31,7 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 				}}
 				onSubmit={async (values) => {
 					if (edit && id) {
-						//await dispatch(editAuthor({ ...values, id }));
+						await dispatch(editPublisher({ ...values, id }));
 						history.push('/publishers');
 						dispatch(actions.setText('Sukces'));
 						dispatch(actions.toggleModal());
