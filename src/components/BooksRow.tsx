@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../store';
 import { Book } from '../utils/types';
 import DeletePublisher from './DeletePublisher';
+import TableCell from './TableCell';
 
 const BooksRow = ({
 	id,
@@ -22,22 +23,22 @@ const BooksRow = ({
 
 	return (
 		<tr key={id} data-cy="book-row">
-			<td>{id}</td>
-			<td>{title}</td>
-			<td>{isbn}</td>
-			<td>{publishmentYear}</td>
-			<td>{publisher?.name ?? 'Wydawca nie znaleziony'}</td>
-			<td>
+			<TableCell>{id}</TableCell>
+			<TableCell>{title}</TableCell>
+			<TableCell>{isbn}</TableCell>
+			<TableCell>{publishmentYear}</TableCell>
+			<TableCell>{publisher?.name ?? 'Wydawca nie znaleziony'}</TableCell>
+			<TableCell>
 				{author
 					? `${author.firstName} ${author.lastName}`
 					: 'Autor nie znaleziony'}
-			</td>
-			<td>
+			</TableCell>
+			<TableCell>
 				<Link to={`/edit-book/${id}`} data-cy="edit">
 					Edytuj
 				</Link>
 				<DeletePublisher id={id} />
-			</td>
+			</TableCell>
 		</tr>
 	);
 };
