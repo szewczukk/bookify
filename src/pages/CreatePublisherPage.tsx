@@ -26,7 +26,7 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 				}}
 				validate={(values) => {
 					if (values.establishmentYear > new Date().getFullYear()) {
-						return { establishmentYear: 'Wrong year' };
+						return { establishmentYear: 'Niepoprawny rok założenia' };
 					}
 				}}
 				onSubmit={async (values) => {
@@ -65,7 +65,9 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 						<button type="submit" data-cy="submit">
 							Zapisz
 						</button>
-						{errors.establishmentYear && <p>{errors.establishmentYear}</p>}
+						{errors.establishmentYear && (
+							<p data-cy="error">{errors.establishmentYear}</p>
+						)}
 					</Form>
 				)}
 			</Formik>

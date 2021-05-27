@@ -19,6 +19,14 @@ describe('Testing publishers functionality', () => {
 		cy.get('[data-cy=publisher-row]').should('contain', '2020');
 	});
 
+	it('Should hit error while creating with the wrong date', () => {
+		cy.get('[data-cy=link-publishers]').click();
+		cy.get('[data-cy=link-create-publisher]').click();
+
+		cy.get('[data-cy=input-year]').type('2137');
+		cy.get('[data-cy=error]').should('contain', 'Niepoprawny rok założenia');
+	});
+
 	it('Edit the new publisher', () => {
 		cy.get('[data-cy=link-publishers]').click();
 		cy.get('[data-cy=publisher-row')
