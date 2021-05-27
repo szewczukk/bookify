@@ -11,6 +11,7 @@ import CreateAuthorPage from './pages/CreateAuthorPage';
 import Modal from './components/Modal';
 import EditAuthorPage from './pages/EditAuthorPage';
 import AllPublishersPage from './pages/AllPublishersPage';
+import CreatePublisherPage from './pages/CreatePublisherPage';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -38,6 +39,9 @@ const App = () => {
 					</Route>
 					<Route path="/publishers/">
 						<AllPublishersPage />
+					</Route>
+					<Route path="/create-publisher/">
+						<CreatePublisherPage />
 					</Route>
 					<Route path="/" exact>
 						<p>Wybierz stronę</p>
