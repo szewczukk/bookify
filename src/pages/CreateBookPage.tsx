@@ -142,8 +142,10 @@ const CreateBookPage = ({
 							Zapisz
 						</button>
 
-						{errors.publishmentYear && <p>{errors.publishmentYear}</p>}
-						{errors.isbn && <p>{errors.isbn}</p>}
+						{errors.publishmentYear && (
+							<p data-cy="error-year">{errors.publishmentYear}</p>
+						)}
+						{errors.isbn && <p data-cy="error-isbn">{errors.isbn}</p>}
 					</Form>
 				)}
 			</Formik>

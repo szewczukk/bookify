@@ -21,6 +21,17 @@ describe('Testing publishers functionality', () => {
 		cy.get('[data-cy=book-row]').should('contain', '0000000000000');
 	});
 
+	it('Testing book form validation', () => {
+		cy.get('[data-cy=link-books]').click();
+		cy.get('[data-cy=link-create-book]').click();
+
+		cy.get('[data-cy=input-year]').clear().type('2137');
+		cy.get('[data-cy=error-year]').should('contain', 'Zła data');
+
+		cy.get('[data-cy=input-isbn]').clear().type('1');
+		cy.get('[data-cy=error-isbn]').should('contain', 'Zły format ISBN');
+	});
+
 	it('Edit the new book', () => {
 		cy.get('[data-cy=link-books]').click();
 		cy.get('[data-cy=book-row')
