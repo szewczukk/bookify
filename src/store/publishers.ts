@@ -10,6 +10,14 @@ export const fetchPublishers = createAsyncThunk<Publisher[]>(
 	},
 );
 
+export const createPublisher = createAsyncThunk<
+	Publisher,
+	Omit<Publisher, 'id'>
+>('publisher/create', async (publisher) => {
+	const response = await api.post('publishers/', publisher);
+	return response.data;
+});
+
 export const deletePublisher = createAsyncThunk<Publisher, number>(
 	'publisher/delete',
 	async (publisherId) => {
@@ -27,9 +35,10 @@ const slice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchPublishers.fulfilled, (state, action) => {
-			action.payload.forEach((publisher) => {
-				state.push(publisher);
-			});
+			return action.payload;
+		});
+		builder.addCase(createPublisher.fulfilled, (state, action) => {
+			state.push(action.payload);
 		});
 		builder.addCase(deletePublisher.fulfilled, (state, action) => {
 			return state.filter((publisher) => publisher.id !== action.payload.id);

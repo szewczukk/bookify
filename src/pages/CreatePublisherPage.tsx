@@ -3,6 +3,7 @@ import { Field, Form, Formik } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { actions } from '../store/modal';
+import { createPublisher } from '../store/publishers';
 
 interface Props {
 	id?: number;
@@ -21,28 +22,26 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 			<Formik
 				initialValues={{
 					name: name || '',
-					establishmentYear: establishmentYear || '',
+					establishmentYear: establishmentYear || 0,
 				}}
 				validate={(values) => {
 					if (values.establishmentYear > new Date().getFullYear()) {
 						return { establishmentYear: 'Wrong year' };
 					}
 				}}
-				onSubmit={
-					async (/*values*/) => {
-						if (edit && id) {
-							//await dispatch(editAuthor({ ...values, id }));
-							history.push('/publishers');
-							dispatch(actions.setText('Sukces'));
-							dispatch(actions.toggleModal());
-						} else {
-							//await dispatch(createAuthor(values));
-							history.push('/publishers');
-							dispatch(actions.setText('Sukces'));
-							dispatch(actions.toggleModal());
-						}
+				onSubmit={async (values) => {
+					if (edit && id) {
+						//await dispatch(editAuthor({ ...values, id }));
+						history.push('/publishers');
+						dispatch(actions.setText('Sukces'));
+						dispatch(actions.toggleModal());
+					} else {
+						await dispatch(createPublisher(values));
+						history.push('/publishers');
+						dispatch(actions.setText('Sukces'));
+						dispatch(actions.toggleModal());
 					}
-				}
+				}}
 			>
 				{({ errors }) => (
 					<Form data-cy="form">
@@ -57,7 +56,6 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 
 						<label htmlFor="establishmentYear">Rok założenia</label>
 						<Field
-							as=""
 							id="establishmentYear"
 							name="establishmentYear"
 							placeholder="Nazwisko"
