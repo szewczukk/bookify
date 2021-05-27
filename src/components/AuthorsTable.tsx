@@ -1,26 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store';
-import { actions as authorsActions, deleteAuthor } from '../store/authors';
-import { actions } from '../store/modal';
+import { deleteAuthor } from '../store/authors';
 
 import DeleteButton from './DeleteButton';
 import TableCell from './TableCell';
 
 const AllAuthorsPage = () => {
 	const dispatch = useAppDispatch();
-	const { status, entities } = useAppSelector((state) => state.authors);
+	const { entities } = useAppSelector((state) => state.authors);
 	const authors = entities
 		.slice()
 		.sort((a, b) => a.lastName.localeCompare(b.lastName));
-
-	useEffect(() => {
-		if (['success', 'error'].includes(status)) {
-			dispatch(actions.setText(status === 'success' ? 'Sukces' : 'Błąd'));
-			dispatch(actions.toggleModal());
-			dispatch(authorsActions.setStatus('none'));
-		}
-	}, [status]);
 
 	return (
 		<table>
