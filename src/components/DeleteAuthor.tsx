@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppDispatch } from '../store';
 import { deleteAuthor } from '../store/authors';
 import { actions } from '../store/modal';
+import ConfirmationButton from './ConfirmationButton';
 
 interface Props {
 	id: number;
 }
 
 const DeleteAuthor = ({ id }: Props) => {
-	const [needsConfirmation, setConfirmation] = useState(false);
 	const dispatch = useAppDispatch();
 
 	const onClick = () => {
-		if (needsConfirmation) {
-			dispatch(actions.setText('Sukces'));
-			dispatch(actions.toggleModal());
-			dispatch(deleteAuthor(id));
-		} else {
-			setConfirmation((prev) => !prev);
-		}
+		dispatch(actions.setText('Sukces'));
+		dispatch(actions.toggleModal());
+		dispatch(deleteAuthor(id));
 	};
 
 	return (
-		<button onClick={onClick} data-cy="delete">
-			{needsConfirmation ? 'Czy na pewno?' : 'Usuń'}
-		</button>
+		<ConfirmationButton
+			afterConfirmation={onClick}
+			text="Usuń"
+			cypressId="delete"
+		/>
 	);
 };
 
