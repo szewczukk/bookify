@@ -1,10 +1,11 @@
 import React from 'react';
-import { Field, Form, Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { createAuthor, editAuthor } from '../store/authors';
 import { actions } from '../store/modal';
 import { Author } from '../utils/types';
+import Form from '../components/Form';
 
 interface Props extends Partial<Author> {
 	edit?: boolean;

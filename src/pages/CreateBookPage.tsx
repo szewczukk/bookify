@@ -1,10 +1,11 @@
 import React from 'react';
-import { Field, Form, Formik, FormikErrors } from 'formik';
+import { Field, Formik, FormikErrors } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store';
 import { actions } from '../store/modal';
 import { Book } from '../utils/types';
 import { createBook, editBook } from '../store/books';
+import Form from '../components/Form';
 
 interface Props extends Partial<Book> {
 	edit?: boolean;
