@@ -2,7 +2,6 @@ import React from 'react';
 import { Field, Formik } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch } from '../store';
-import { actions } from '../store/modal';
 import { createPublisher, editPublisher } from '../store/publishers';
 import { Publisher } from '../utils/types';
 import Form from '../components/Form';
@@ -31,8 +30,6 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 				onSubmit={async (values) => {
 					if (edit && id) {
 						await dispatch(editPublisher({ ...values, id }));
-						dispatch(actions.setText('Sukces'));
-						dispatch(actions.toggleModal());
 					} else {
 						await dispatch(createPublisher(values));
 					}

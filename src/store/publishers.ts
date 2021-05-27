@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import api from '../utils/api';
 import { Publisher } from '../utils/types';
 
@@ -43,7 +43,11 @@ const initialState: PublishersState = { entities: [], status: 'none' };
 const slice = createSlice({
 	name: 'publishers',
 	initialState,
-	reducers: {},
+	reducers: {
+		setStatus: (state, action: PayloadAction<PublishersState['status']>) => {
+			state.status = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchPublishers.fulfilled, (state, action) => {
 			state.entities = action.payload;
@@ -63,6 +67,10 @@ const slice = createSlice({
 				),
 				action.payload,
 			];
+			state.status = 'success';
+		});
+		builder.addCase(editPublisher.rejected, (state) => {
+			state.status = 'error';
 		});
 	},
 });
