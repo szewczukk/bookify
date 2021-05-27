@@ -2,7 +2,6 @@ import React from 'react';
 import { Field, Formik, FormikErrors } from 'formik';
 import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store';
-import { actions } from '../store/modal';
 import { Book } from '../utils/types';
 import { createBook, editBook } from '../store/books';
 import Form from '../components/Form';
@@ -67,8 +66,6 @@ const CreateBookPage = ({
 				onSubmit={async (values) => {
 					if (edit && id) {
 						await dispatch(editBook({ ...values, id }));
-						dispatch(actions.setText('Sukces'));
-						dispatch(actions.toggleModal());
 					} else {
 						await dispatch(
 							createBook({ ...values, isbn: values.isbn.replaceAll('-', '') }),

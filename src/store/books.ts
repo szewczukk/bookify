@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import api from '../utils/api';
 import { Book } from '../utils/types';
 
@@ -46,7 +46,11 @@ const initialState: BooksState = {
 const slice = createSlice({
 	name: 'books',
 	initialState,
-	reducers: {},
+	reducers: {
+		setStatus: (state, action: PayloadAction<BooksState['status']>) => {
+			state.status = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchBooks.fulfilled, (state, action) => {
 			state.entities = action.payload;
@@ -64,6 +68,10 @@ const slice = createSlice({
 				...state.entities.filter((book) => book.id !== action.payload.id),
 				action.payload,
 			];
+			state.status = 'success';
+		});
+		builder.addCase(editBook.rejected, (state) => {
+			state.status = 'error';
 		});
 	},
 });
