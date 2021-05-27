@@ -17,7 +17,7 @@ const Navigation = () => {
 				cypressId="publishers"
 				subpage="publishers"
 				title="Wydawnictwa"
-				data={publishers}
+				data={publishers.entities}
 			/>
 			<NavigationSection
 				cypressId="books"

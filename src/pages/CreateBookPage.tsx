@@ -32,7 +32,7 @@ const CreateBookPage = ({
 	const history = useHistory();
 	const { authors, publishers } = useAppSelector((state) => state);
 
-	if (!authors.entities.length || !publishers.length) {
+	if (!authors.entities.length || !publishers.entities.length) {
 		return <h1>Brak wydawców i/lub autorów</h1>;
 	}
 
@@ -45,7 +45,7 @@ const CreateBookPage = ({
 					isbn: isbn || '',
 					publishmentYear: publishmentYear || 0,
 					authorId: authorId || authors.entities[0].id,
-					publisherId: publisherId || publishers[0].id,
+					publisherId: publisherId || publishers.entities[0].id,
 				}}
 				validate={(values) => {
 					const errors: FormikErrors<FormValues> = {};
@@ -129,7 +129,7 @@ const CreateBookPage = ({
 							data-cy="input-publisher"
 							as="select"
 						>
-							{publishers.map((publisher) => (
+							{publishers.entities.map((publisher) => (
 								<option key={publisher.id} value={publisher.id}>
 									{publisher.name}
 								</option>

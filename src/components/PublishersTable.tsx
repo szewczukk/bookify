@@ -6,7 +6,7 @@ import DeleteButton from './DeleteButton';
 import TableCell from './TableCell';
 
 const AllPublishersTable = () => {
-	const publishers = useAppSelector((state) => state.publishers);
+	const { entities } = useAppSelector((state) => state.publishers);
 	const dispatch = useAppDispatch();
 
 	return (
@@ -20,7 +20,7 @@ const AllPublishersTable = () => {
 				</tr>
 			</thead>
 			<tbody>
-				{publishers.map((publisher) => (
+				{entities.map((publisher) => (
 					<tr key={publisher.id} data-cy="publisher-row">
 						<TableCell>{publisher.id}</TableCell>
 						<TableCell>{publisher.name}</TableCell>

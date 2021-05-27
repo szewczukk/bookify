@@ -9,9 +9,7 @@ interface RouterParams {
 
 const EditPublisherPage = () => {
 	const { id } = useParams<RouterParams>();
-	const publishers = useAppSelector((state) => state.publishers);
-
-	const publisher = publishers.find(
+	const publisher = useAppSelector((state) => state.publishers.entities).find(
 		(publisher) => publisher.id === parseInt(id),
 	);
 

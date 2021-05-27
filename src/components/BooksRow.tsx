@@ -15,7 +15,7 @@ const BooksRow = ({
 	authorId,
 }: Book) => {
 	const dispatch = useAppDispatch();
-	const publisher = useAppSelector((state) => state.publishers)
+	const publisher = useAppSelector((state) => state.publishers.entities)
 		.slice()
 		.find((publisher) => publisher.id === publisherId);
 	const author = useAppSelector((state) => state.authors.entities)
