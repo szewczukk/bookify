@@ -13,6 +13,7 @@ import EditAuthorPage from './pages/EditAuthorPage';
 import AllPublishersPage from './pages/AllPublishersPage';
 import CreatePublisherPage from './pages/CreatePublisherPage';
 import EditPublisherPage from './pages/EditPublisherPage';
+import AllBooksPage from './pages/AllBooksPage';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -47,6 +48,9 @@ const App = () => {
 					<Route path="/edit-publisher/:id">
 						<EditPublisherPage />
 					</Route>
+					<Route path="/books/">
+						<AllBooksPage />
+					</Route>
 					<Route path="/" exact>
 						<p>Wybierz stronę</p>
 					</Route>
@@ -67,10 +71,7 @@ const Wrapper = styled.div`
 	padding: 16px;
 	background-color: rgb(240, 240, 240);
 
-	@media (min-width: 1000px) {
-		width: 1000px;
-		margin: 0 auto;
-
+	@media (min-width: 1200px) {
 		display: grid;
 		grid-template-columns: 250px 1fr;
 		grid-template-rows: 1fr;
