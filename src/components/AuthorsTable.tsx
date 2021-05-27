@@ -8,7 +8,7 @@ import TableCell from './TableCell';
 
 const AllAuthorsPage = () => {
 	const dispatch = useAppDispatch();
-	const authors = useAppSelector((state) => state.authors)
+	const authors = useAppSelector((state) => state.authors.entities)
 		.slice()
 		.sort((a, b) => a.lastName.localeCompare(b.lastName));
 

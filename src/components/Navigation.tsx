@@ -11,7 +11,7 @@ const Navigation = () => {
 				cypressId="authors"
 				subpage="authors"
 				title="Autorzy"
-				data={authors}
+				data={authors.entities}
 			/>
 			<NavigationSection
 				cypressId="publishers"

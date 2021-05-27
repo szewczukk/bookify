@@ -34,8 +34,14 @@ export const deleteAuthor = createAsyncThunk<Author, number>(
 	},
 );
 
-type AuthorsState = Author[];
-const initialState: AuthorsState = [];
+interface AuthorsState {
+	entities: Author[];
+	status: 'none' | 'success' | 'error' | 'pending';
+}
+const initialState: AuthorsState = {
+	entities: [],
+	status: 'none',
+};
 
 const slice = createSlice({
 	name: 'authors',
@@ -43,17 +49,19 @@ const slice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchAuthors.fulfilled, (state, action) => {
-			return action.payload;
+			state.entities = action.payload;
 		});
 		builder.addCase(createAuthor.fulfilled, (state, action) => {
-			state.push(action.payload);
+			state.entities.push(action.payload);
 		});
 		builder.addCase(deleteAuthor.fulfilled, (state, action) => {
-			return state.filter((author) => author.id !== action.payload.id);
+			state.entities = state.entities.filter(
+				(author) => author.id !== action.payload.id,
+			);
 		});
 		builder.addCase(editAuthor.fulfilled, (state, action) => {
-			return [
-				...state.filter((author) => author.id !== action.payload.id),
+			state.entities = [
+				...state.entities.filter((author) => author.id !== action.payload.id),
 				action.payload,
 			];
 		});
