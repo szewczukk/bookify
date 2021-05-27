@@ -18,4 +18,21 @@ describe('Testing publishers functionality', () => {
 		cy.get('[data-cy=publisher-row').should('contain', 'ABC');
 		cy.get('[data-cy=publisher-row').should('contain', '2020');
 	});
+
+	it('Should delete a created user', () => {
+		cy.get('[data-cy=link-publishers]').click();
+		cy.get('[data-cy=publisher-row')
+			.contains('ABC')
+			.parent()
+			.within(() => {
+				cy.get('[data-cy=delete]')
+					.should('contain', 'Usuń')
+					.click()
+					.should('contain', 'Czy na pewno?')
+					.click();
+			});
+
+		cy.get('[data-cy=modal-text]').should('contain', 'Sukces');
+		cy.get('[data-cy=modal-submit]').click();
+	});
 });
