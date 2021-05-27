@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
+import { deleteBook } from '../store/books';
 import { Book } from '../utils/types';
-import DeleteBook from './DeleteBook';
+import DeleteButton from './DeleteButton';
 import TableCell from './TableCell';
 
 const BooksRow = ({
@@ -13,10 +14,10 @@ const BooksRow = ({
 	publishmentYear,
 	authorId,
 }: Book) => {
+	const dispatch = useAppDispatch();
 	const publisher = useAppSelector((state) => state.publishers)
 		.slice()
 		.find((publisher) => publisher.id === publisherId);
-
 	const author = useAppSelector((state) => state.authors)
 		.slice()
 		.find((author) => author.id === authorId);
@@ -37,7 +38,7 @@ const BooksRow = ({
 				<Link to={`/edit-book/${id}`} data-cy="edit">
 					Edytuj
 				</Link>
-				<DeleteBook id={id} />
+				<DeleteButton onClick={() => dispatch(deleteBook(id))} />
 			</TableCell>
 		</tr>
 	);

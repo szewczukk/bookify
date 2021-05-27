@@ -1,20 +1,20 @@
 import React from 'react';
 import { useAppDispatch } from '../store';
-import { deleteBook } from '../store/books';
 import { actions } from '../store/modal';
 import ConfirmationButton from './ConfirmationButton';
 
 interface Props {
-	id: number;
+	onClick: () => void;
 }
 
-const DeleteBook = ({ id }: Props) => {
+const DeleteButton = (props: Props) => {
 	const dispatch = useAppDispatch();
 
 	const onClick = () => {
+		props.onClick();
+		// I know there was no need for putting the modal here, just wanted to be sure the deletion happened
 		dispatch(actions.setText('Sukces'));
 		dispatch(actions.toggleModal());
-		dispatch(deleteBook(id));
 	};
 
 	return (
@@ -26,4 +26,4 @@ const DeleteBook = ({ id }: Props) => {
 	);
 };
 
-export default DeleteBook;
+export default DeleteButton;

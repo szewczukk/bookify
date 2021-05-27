@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../store';
-import DeletePublisher from './DeletePublisher';
+import { useAppDispatch, useAppSelector } from '../store';
+import { deletePublisher } from '../store/publishers';
+import DeleteButton from './DeleteButton';
 import TableCell from './TableCell';
 
 const AllPublishersTable = () => {
 	const publishers = useAppSelector((state) => state.publishers);
+	const dispatch = useAppDispatch();
 
 	return (
 		<table>
@@ -27,7 +29,9 @@ const AllPublishersTable = () => {
 							<Link to={`/edit-publisher/${publisher.id}`} data-cy="edit">
 								Edytuj
 							</Link>
-							<DeletePublisher id={publisher.id} />
+							<DeleteButton
+								onClick={() => dispatch(deletePublisher(publisher.id))}
+							/>
 						</TableCell>
 					</tr>
 				))}

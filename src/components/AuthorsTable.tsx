@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
+import { deleteAuthor } from '../store/authors';
 
-import DeleteAuthor from './DeleteAuthor';
+import DeleteButton from './DeleteButton';
 import TableCell from './TableCell';
 
 const AllAuthorsPage = () => {
+	const dispatch = useAppDispatch();
 	const authors = useAppSelector((state) => state.authors)
 		.slice()
 		.sort((a, b) => a.lastName.localeCompare(b.lastName));
@@ -30,7 +32,7 @@ const AllAuthorsPage = () => {
 							<Link to={`/edit-author/${author.id}`} data-cy="edit">
 								Edytuj
 							</Link>
-							<DeleteAuthor id={author.id} />
+							<DeleteButton onClick={() => dispatch(deleteAuthor(author.id))} />
 						</TableCell>
 					</tr>
 				))}
