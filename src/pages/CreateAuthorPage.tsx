@@ -27,13 +27,10 @@ const CreateAuthorPage = ({ id, firstName, lastName, edit }: Props) => {
 
 						dispatch(actions.setText(status === 'success' ? 'Sukces' : 'Błąd'));
 						dispatch(actions.toggleModal());
-
-						if (status === 'success') {
-							history.push('/authors');
-						}
 					} else {
 						await dispatch(createAuthor(values));
 					}
+					history.push('/authors');
 				}}
 			>
 				<Form data-cy="form">

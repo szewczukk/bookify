@@ -21,7 +21,7 @@ export const createAuthor = createAsyncThunk<Author, Omit<Author, 'id'>>(
 export const editAuthor = createAsyncThunk<Author, Author>(
 	'authors/edit',
 	async (author) => {
-		const response = await api.put(`authors/${author.id}` /*author*/);
+		const response = await api.put(`authors/${author.id}`, author);
 		return response.data;
 	},
 );

@@ -32,7 +32,7 @@ const CreateBookPage = ({
 	const history = useHistory();
 	const { authors, publishers } = useAppSelector((state) => state);
 
-	if (!authors.length || !publishers.length) {
+	if (!authors.entities.length || !publishers.length) {
 		return <h1>Brak wydawców i/lub autorów</h1>;
 	}
 
@@ -44,7 +44,7 @@ const CreateBookPage = ({
 					title: title || '',
 					isbn: isbn || '',
 					publishmentYear: publishmentYear || 0,
-					authorId: authorId || authors[0].id,
+					authorId: authorId || authors.entities[0].id,
 					publisherId: publisherId || publishers[0].id,
 				}}
 				validate={(values) => {
@@ -114,7 +114,7 @@ const CreateBookPage = ({
 							data-cy="input-author"
 							as="select"
 						>
-							{authors.map((author) => (
+							{authors.entities.map((author) => (
 								<option key={author.id} value={author.id}>
 									{author.firstName} {author.lastName}
 								</option>
