@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store';
 import { actions } from '../store/modal';
 import { Book } from '../utils/types';
+import { createBook } from '../store/books';
 
 interface Props extends Partial<Book> {
 	edit?: boolean;
@@ -38,18 +39,17 @@ const CreateBookPage = ({
 					publisherId: publisherId || publishers[0].id,
 				}}
 				onSubmit={async (values) => {
-					/*if (edit && id) {
-							//await dispatch(editAuthor({ ...values, id }));
-							history.push('/books');
-							dispatch(actions.setText('Sukces'));
-							dispatch(actions.toggleModal());
-						} else {
-							//await dispatch(createAuthor(values));
-							history.push('/books');
-							dispatch(actions.setText('Sukces'));
-							dispatch(actions.toggleModal());
-						}*/
-					console.log(values);
+					if (edit && id) {
+						//await dispatch(editAuthor({ ...values, id }));
+						history.push('/books');
+						dispatch(actions.setText('Sukces'));
+						dispatch(actions.toggleModal());
+					} else {
+						await dispatch(createBook(values));
+						history.push('/books');
+						dispatch(actions.setText('Sukces'));
+						dispatch(actions.toggleModal());
+					}
 				}}
 			>
 				<Form data-cy="form">
@@ -69,6 +69,15 @@ const CreateBookPage = ({
 						placeholder="ISBN"
 						required
 						data-cy="input-isbn"
+					/>
+
+					<label htmlFor="publishmentYear">Rok publikacji</label>
+					<Field
+						id="publishmentYear"
+						name="publishmentYear"
+						placeholder="Rok publikacji"
+						required
+						data-cy="input-year"
 					/>
 
 					<label htmlFor="authorId">Autor</label>

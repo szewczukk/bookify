@@ -10,6 +10,14 @@ export const fetchBooks = createAsyncThunk<Book[]>(
 	},
 );
 
+export const createBook = createAsyncThunk<Book, Omit<Book, 'id'>>(
+	'books/create',
+	async (book) => {
+		const response = await api.post('books/', book);
+		return response.data;
+	},
+);
+
 type BooksState = Book[];
 const initialState: BooksState = [];
 
@@ -19,9 +27,10 @@ const slice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchBooks.fulfilled, (state, action) => {
-			action.payload.forEach((book) => {
-				state.push(book);
-			});
+			return action.payload;
+		});
+		builder.addCase(createBook.fulfilled, (state, action) => {
+			state.push(action.payload);
 		});
 	},
 });
