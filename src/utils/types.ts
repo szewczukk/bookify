@@ -13,7 +13,7 @@ export interface Publisher {
 export interface Book {
 	id: number;
 	title: string;
-	isbn: number;
+	isbn: string;
 	publishmentYear: number;
 	authorId: number;
 	publisherId: number;
