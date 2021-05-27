@@ -49,7 +49,7 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 						<Field
 							id="name"
 							name="name"
-							placeholder="nazwa"
+							placeholder="Nazwa"
 							required
 							data-cy="input-name"
 						/>
@@ -58,7 +58,7 @@ const CreatePublisherPage = ({ id, name, establishmentYear, edit }: Props) => {
 						<Field
 							id="establishmentYear"
 							name="establishmentYear"
-							placeholder="Nazwisko"
+							placeholder="Rok założenia"
 							required
 							data-cy="input-year"
 						/>
