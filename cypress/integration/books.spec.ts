@@ -21,10 +21,32 @@ describe('Testing publishers functionality', () => {
 		cy.get('[data-cy=book-row]').should('contain', '0000000000000');
 	});
 
-	it('Should delete a created book', () => {
+	it('Edit the new book', () => {
 		cy.get('[data-cy=link-books]').click();
 		cy.get('[data-cy=book-row')
 			.contains('Hobbit')
+			.parent()
+			.within(() => {
+				cy.get('[data-cy=edit]').click();
+			});
+
+		cy.get('[data-cy=input-title]').clear().type('Władca Pierścieni');
+		cy.get('[data-cy=input-year]').clear().type('2020');
+		cy.get('[data-cy=form]').submit();
+
+		cy.get('[data-cy=modal-text]').should('contain', 'Sukces');
+		cy.get('[data-cy=modal-submit]').click();
+
+		cy.url().should('contain', 'books');
+
+		cy.get('[data-cy=book-row]').should('contain', 'Władca Pierścieni');
+		cy.get('[data-cy=book-row]').should('contain', '2020');
+	});
+
+	it('Should delete a created book', () => {
+		cy.get('[data-cy=link-books]').click();
+		cy.get('[data-cy=book-row')
+			.contains('Władca Pierścieni')
 			.parent()
 			.within(() => {
 				cy.get('[data-cy=delete]')

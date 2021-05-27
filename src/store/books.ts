@@ -18,6 +18,14 @@ export const createBook = createAsyncThunk<Book, Omit<Book, 'id'>>(
 	},
 );
 
+export const editBook = createAsyncThunk<Book, Book>(
+	'authors/edit',
+	async (book) => {
+		const response = await api.put(`books/${book.id}`, book);
+		return response.data;
+	},
+);
+
 export const deleteBook = createAsyncThunk<Book, number>(
 	'authors/delete',
 	async (bookId) => {
@@ -42,6 +50,12 @@ const slice = createSlice({
 		});
 		builder.addCase(deleteBook.fulfilled, (state, action) => {
 			return state.filter((book) => book.id !== action.payload.id);
+		});
+		builder.addCase(editBook.fulfilled, (state, action) => {
+			return [
+				...state.filter((book) => book.id !== action.payload.id),
+				action.payload,
+			];
 		});
 	},
 });

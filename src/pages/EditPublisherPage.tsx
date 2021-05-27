@@ -11,9 +11,11 @@ const EditPublisherPage = () => {
 	const { id } = useParams<RouterParams>();
 	const publishers = useAppSelector((state) => state.publishers);
 
-	const author = publishers.find((publisher) => publisher.id === parseInt(id));
+	const publisher = publishers.find(
+		(publisher) => publisher.id === parseInt(id),
+	);
 
-	return <CreatePublisherPage {...author} edit={true} />;
+	return <CreatePublisherPage {...publisher} edit={true} />;
 };
 
 export default EditPublisherPage;

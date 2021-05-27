@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store';
 import { actions } from '../store/modal';
 import { Book } from '../utils/types';
-import { createBook } from '../store/books';
+import { createBook, editBook } from '../store/books';
 
 interface Props extends Partial<Book> {
 	edit?: boolean;
@@ -35,6 +35,8 @@ const CreateBookPage = ({
 		return <h1>Brak wydawców i/lub autorów</h1>;
 	}
 
+	console.log(title, isbn, authorId, publisherId);
+
 	return (
 		<main>
 			<Link to="/books">Powrót do listy</Link>
@@ -62,7 +64,7 @@ const CreateBookPage = ({
 				}}
 				onSubmit={async (values) => {
 					if (edit && id) {
-						//await dispatch(editAuthor({ ...values, id }));
+						await dispatch(editBook({ ...values, id }));
 						history.push('/books');
 						dispatch(actions.setText('Sukces'));
 						dispatch(actions.toggleModal());

@@ -15,6 +15,7 @@ import CreatePublisherPage from './pages/CreatePublisherPage';
 import EditPublisherPage from './pages/EditPublisherPage';
 import AllBooksPage from './pages/AllBooksPage';
 import CreateBookPage from './pages/CreateBookPage';
+import EditBookPage from './pages/EditBookPage';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -54,6 +55,9 @@ const App = () => {
 					</Route>
 					<Route path="/create-book">
 						<CreateBookPage />
+					</Route>
+					<Route path="/edit-book/:id">
+						<EditBookPage />
 					</Route>
 					<Route path="/" exact>
 						<p>Wybierz stronę</p>
