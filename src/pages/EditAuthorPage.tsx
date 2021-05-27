@@ -9,9 +9,9 @@ interface RouterParams {
 
 const EditAuthorPage = () => {
 	const { id } = useParams<RouterParams>();
-	const authors = useAppSelector((state) => state.authors.entities);
+	const { entities } = useAppSelector((state) => state.authors);
 
-	const author = authors.find((author) => author.id === parseInt(id));
+	const author = entities.find((author) => author.id === parseInt(id));
 
 	return <CreateAuthorPage {...author} edit={true} />;
 };

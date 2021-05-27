@@ -21,7 +21,7 @@ export const createAuthor = createAsyncThunk<Author, Omit<Author, 'id'>>(
 export const editAuthor = createAsyncThunk<Author, Author>(
 	'authors/edit',
 	async (author) => {
-		const response = await api.put(`authors/${author.id}`, author);
+		const response = await api.put(`authors/${author.id}` /*author*/);
 		return response.data;
 	},
 );
@@ -36,7 +36,7 @@ export const deleteAuthor = createAsyncThunk<Author, number>(
 
 interface AuthorsState {
 	entities: Author[];
-	status: 'none' | 'success' | 'error' | 'pending';
+	status: 'none' | 'success' | 'error';
 }
 const initialState: AuthorsState = {
 	entities: [],
@@ -50,20 +50,27 @@ const slice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(fetchAuthors.fulfilled, (state, action) => {
 			state.entities = action.payload;
+			state.status = 'success';
 		});
 		builder.addCase(createAuthor.fulfilled, (state, action) => {
 			state.entities.push(action.payload);
+			state.status = 'success';
 		});
 		builder.addCase(deleteAuthor.fulfilled, (state, action) => {
 			state.entities = state.entities.filter(
 				(author) => author.id !== action.payload.id,
 			);
+			state.status = 'success';
 		});
 		builder.addCase(editAuthor.fulfilled, (state, action) => {
 			state.entities = [
 				...state.entities.filter((author) => author.id !== action.payload.id),
 				action.payload,
 			];
+			state.status = 'success';
+		});
+		builder.addCase(editAuthor.rejected, (state) => {
+			state.status = 'error';
 		});
 	},
 });
